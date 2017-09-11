@@ -1,18 +1,25 @@
 package com.example.stock.utils;
 
+import com.example.stock.base.BaseErrorInterfaceInfo;
+import com.example.stock.base.BaseRspEntity;
 import okhttp3.*;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Map;
 
+@Component
 public class OkHttpUtil {
     public static final MediaType mediaType
             = MediaType.parse("application/json; charset=utf-8");
 
     OkHttpClient client = new OkHttpClient();
 
-    public String run(String url, String appcode) throws IOException {
+    public String run(String url, Map<String, String> querys, String appcode) throws IOException {
         Request request = new Request.Builder()
-                .url(url)
+                .url(createUrl(url, querys))
                 .addHeader("Authorization", "APPCODE " + appcode)
                 .build();
 
@@ -21,9 +28,9 @@ public class OkHttpUtil {
         }
     }
 
-    public String run(String url) throws IOException {
+    public String run(String url, Map<String, String> param) throws IOException {
         Request request = new Request.Builder()
-                .url(url)
+                .url(createUrl(url,param))
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -42,5 +49,29 @@ public class OkHttpUtil {
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
         }
+    }
+
+    public String createUrl(String url, Map<String, String> params) {
+        if (params != null && params.size() > 0) {
+            try {
+                StringBuilder sb = new StringBuilder();
+                sb.append(url);
+                if (url.indexOf('&') > 0 || url.indexOf('?') > 0) {
+                    sb.append("&");
+                } else {
+                    sb.append("?");
+                }
+                for (Map.Entry<String, String> urlParams : params.entrySet()) {
+                    //对参数进行 utf-8 编码,防止头信息传中文
+                    String urlValue = URLEncoder.encode(urlParams.getValue(), "UTF-8");
+                    sb.append(urlParams.getKey()).append("=").append(urlValue).append("&");
+                }
+                sb.deleteCharAt(sb.length() - 1);
+                return sb.toString();
+            } catch (UnsupportedEncodingException e) {
+                new BaseRspEntity(BaseErrorInterfaceInfo.BAD_REQUEST);
+            }
+        }
+        return url;
     }
 }

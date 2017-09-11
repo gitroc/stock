@@ -37,9 +37,9 @@ public class NtStockEntity {
 
     private int error_code;
     private String reason;
-    private NtStockBody result;
+    private NtStockBody result = new NtStockBody();
 
-    class NtStockBody {
+    public class NtStockBody {
         @Override
         public String toString() {
             return JSON.toJSONString(this);
@@ -101,7 +101,7 @@ public class NtStockEntity {
         private int start;
     }
 
-    class StockIndex {
+    public class StockIndex {
         @Override
         public String toString() {
             return JSON.toJSONString(this);
@@ -123,43 +123,43 @@ public class NtStockEntity {
             this.shortName = shortName;
         }
 
-        public float getZd() {
+        public double getZd() {
             return zd;
         }
 
-        public void setZd(float zd) {
+        public void setZd(double zd) {
             this.zd = zd;
         }
 
-        public float getZdf() {
+        public double getZdf() {
             return zdf;
         }
 
-        public void setZdf(float zdf) {
+        public void setZdf(double zdf) {
             this.zdf = zdf;
         }
 
-        public float getZRSP() {
+        public String getZRSP() {
             return ZRSP;
         }
 
-        public void setZRSP(float ZRSP) {
+        public void setZRSP(String ZRSP) {
             this.ZRSP = ZRSP;
         }
 
-        public float getZJCJ() {
+        public double getZJCJ() {
             return ZJCJ;
         }
 
-        public void setZJCJ(float ZJCJ) {
+        public void setZJCJ(double ZJCJ) {
             this.ZJCJ = ZJCJ;
         }
 
-        public float getCJJE() {
+        public int getCJJE() {
             return CJJE;
         }
 
-        public void setCJJE(float CJJE) {
+        public void setCJJE(int CJJE) {
             this.CJJE = CJJE;
         }
 
@@ -195,11 +195,11 @@ public class NtStockEntity {
             this.address = address;
         }
 
-        public float getRegistCapi() {
+        public double getRegistCapi() {
             return registCapi;
         }
 
-        public void setRegistCapi(float registCapi) {
+        public void setRegistCapi(double registCapi) {
             this.registCapi = registCapi;
         }
 
@@ -259,19 +259,19 @@ public class NtStockEntity {
             this.updateTime = updateTime;
         }
 
-        public float getZGCJ() {
+        public double getZGCJ() {
             return ZGCJ;
         }
 
-        public void setZGCJ(float ZGCJ) {
+        public void setZGCJ(double ZGCJ) {
             this.ZGCJ = ZGCJ;
         }
 
-        public float getZDCJ() {
+        public double getZDCJ() {
             return ZDCJ;
         }
 
-        public void setZDCJ(float ZDCJ) {
+        public void setZDCJ(double ZDCJ) {
             this.ZDCJ = ZDCJ;
         }
 
@@ -285,16 +285,16 @@ public class NtStockEntity {
 
         private String _id;
         private String shortName;
-        private float zd;
-        private float zdf;
-        private float ZRSP;
-        private float ZJCJ;
-        private float CJJE;
+        private double zd;
+        private double zdf;
+        private String ZRSP;
+        private double ZJCJ;
+        private int CJJE;
         private float CJSL;
         private int type;
         private String province;
         private String address;
-        private float registCapi;
+        private double registCapi;
         private String company;
         private String operName;
         private String upDate;
@@ -302,8 +302,8 @@ public class NtStockEntity {
         private String categoryStr;
         private String updateDate;
         private String updateTime;
-        private float ZGCJ;
-        private float ZDCJ;
+        private double ZGCJ;
+        private double ZDCJ;
         private String companyName;
     }
 }

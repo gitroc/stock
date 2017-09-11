@@ -39,7 +39,12 @@ public class StockEntity {
     private String showapi_res_error;
     private Stockbody showapi_res_body;
 
-    class Stockbody {
+    public class Stockbody {
+        @Override
+        public String toString() {
+            return JSON.toJSONString(this);
+        }
+
         public int getRet_code() {
             return ret_code;
         }
@@ -69,7 +74,7 @@ public class StockEntity {
         private List<StockDetails> list = new ArrayList<>();
     }
 
-    class StockIndex {
+    public class StockIndex {
         public String getYestodayClosePrice() {
             return yestodayClosePrice;
         }
@@ -234,7 +239,7 @@ public class StockEntity {
         private String minPrice;
     }
 
-    class StockDetails {
+    public class StockDetails {
         public String getTodayMax() {
             return todayMax;
         }
