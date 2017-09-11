@@ -21,6 +21,18 @@ public class OkHttpUtil {
         }
     }
 
+    public String run(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            String res = response.body().string();
+            System.out.println("[roc]" + res);
+            return res;
+        }
+    }
+
     public String post(String url, String json) throws IOException {
         RequestBody body = RequestBody.create(mediaType, json);
         Request request = new Request.Builder()

@@ -12,6 +12,9 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * https://market.aliyun.com/products/57000002/cmapi010845.html#sku=yuncode484500000
+ */
 @Service
 public class StockService {
     private String url = "http://stock.market.alicloudapi.com/batch-real-stockinfo";
